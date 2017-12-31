@@ -1,0 +1,62 @@
+author: mongoose-os
+description: A Mongoose OS app skeleton
+version: 1.0
+
+libs_version: ${mos.version}
+modules_version: ${mos.version}
+mongoose_os_version: ${mos.version}
+
+# Optional. List of tags for online search.
+tags:
+  - c
+
+# List of files / directories with C sources. No slashes at the end of dir names.
+sources:
+  - src
+
+# List of dirs. Files from these dirs will be copied to the device filesystem
+filesystem:
+  - fs
+
+config_schema:
+  - ["energy", "o", {title: "Simple energy monitor based on LED counter pulses"}]
+  - ["energy.sensor_gpio", "i", 0, {title: ""}]
+  - ["energy.button_gpio", "i", 2, {title: ""}]
+  - ["energy.button_debounce", "i", 200, {title: ""}]
+  - ["energy.sensor_debounce", "i", 10, {title: ""}]
+  - ["energy.pulse_div", "i", 2, {title: "Place a value if your sensor generates two edges on each pulse"}]
+  - ["energy.pulse_per_unit", "i", 6400, {title: "LED pulses meaning one unit (kW per hour)"}]
+  - ["energy.upload_interval", "i", 60, {title: "MQTT upload interval in secs"}]
+  - ["energy.cayenne_channel", "i", 2, {title: "mydevices cayenne channel to which publish to"}]
+  - ["wifi.sta.enable", true]
+  - ["wifi.sta.ssid", "Wonderland-upc"]
+  - ["wifi.sta.pass", "FollowTheWhiteRabbit"]
+  - ["wifi.ap.enable", true]
+  - ["wifi.ap.ssid", "INCLOUD-energy"]
+  - ["wifi.ap.pass", "incloud"]
+  - ["wifi.ap.hidden", true]
+  - ["mqtt.enable", true]
+  - ["mqtt.server", "broker.hivemq.com:1883"]
+  - ["mqtt.client_id", "clientid"]
+  - ["mqtt.user", "user"]
+  - ["mqtt.pass", "pass"]
+  - ["dash.enable", true]
+  - ["dash.token", "dashtoken"]
+
+# List of libraries used by this app, in order of initialisation
+libs:
+  - origin: https://github.com/mongoose-os-libs/ca-bundle
+  - origin: https://github.com/mongoose-os-libs/rpc-service-config
+  - origin: https://github.com/mongoose-os-libs/rpc-service-fs
+  - origin: https://github.com/mongoose-os-libs/rpc-uart
+  - origin: https://github.com/mongoose-os-libs/rpc-common
+  - origin: https://github.com/mongoose-os-libs/http-server
+  - origin: https://github.com/mongoose-os-libs/wifi
+  - origin: https://github.com/mongoose-os-libs/mqtt
+  - origin: https://github.com/mongoose-os-libs/dash
+
+build_vars:
+  FLASH_SIZE: 1048576
+# Used by the mos tool to catch mos binaries incompatible with this file format
+manifest_version: 2017-05-18
+
